@@ -35,6 +35,26 @@ namespace IntesaSanFabbro22F
             private double saldo;
             private bool chiuso = false;
 
+            public double Saldo
+            {
+                get { return saldo; }
+                set
+                {
+                    saldo = value;
+                   
+                }
+            }
+
+            public bool Chiuso
+            {
+                get { return chiuso; }
+                set
+                {
+                    chiuso = value;
+
+                }
+            }
+
             // apriconto
 
             public void Apriconto(string nome, double saldo_input)
@@ -163,7 +183,7 @@ namespace IntesaSanFabbro22F
         {
             private Conto[] array = new Conto[100];
 
-            public Banca()
+            public void Crea()
             {
                 for (int i = 0; i < array.Length; i++)
                 {
@@ -181,11 +201,13 @@ namespace IntesaSanFabbro22F
                 {
                     if (array[i].Nome == nome)
                     {
+                        
                         pos = i;
                         break;
                     }
                     else if (array[i].Nome == null)
                     {
+
                         pos = i;
                         break;
                     }
@@ -216,14 +238,9 @@ namespace IntesaSanFabbro22F
 
             public void VisualizzaSaldo(string Nome_Utente)
             {
-                for (int i = 0; i < 100; i++)
-                {
-                    if (array[i].Nome == Nome_Utente)
-                    {
-                        array[i].VisualizzaSaldo();
-                        break;
-                    }
-                }
+                int pos = Ricerca(Nome_Utente);
+                Console.WriteLine($"Il saldo del sig.{array[pos].Nome} è di {array[pos].Saldo} euro");
+                Console.ReadLine();
             }
 
 
@@ -231,6 +248,8 @@ namespace IntesaSanFabbro22F
         }
         static void Main(string[] args)
         {
+            Banca banca = new Banca();
+            banca.Crea();
             bool uscita = false;
             bool uscita2 = false;
             while (uscita == false)
@@ -306,8 +325,8 @@ namespace IntesaSanFabbro22F
                     case "2": // più conti
                         while (uscita2 == false)
                         {
-                            Banca banca = new Banca();
-
+                            
+                            
                             Console.Clear();
                             Console.WriteLine("1) Apri il conto");
                             Console.WriteLine("2) Azzera il conto");
@@ -371,4 +390,5 @@ namespace IntesaSanFabbro22F
         }
     }
 }
+
 
